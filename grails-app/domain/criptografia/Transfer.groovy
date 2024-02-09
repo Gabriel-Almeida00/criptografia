@@ -1,5 +1,8 @@
 package criptografia
 
+import grails.gorm.annotation.Entity
+
+@Entity
 class Transfer {
 
     String userDocument
