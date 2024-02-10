@@ -15,11 +15,10 @@ class TransferController {
     TransferService transferService
 
     static responseFormats = ['json', 'xml']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [list: "GET", save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond transferService.list(params), model:[transferCount: transferService.count()]
+    List<Transfer> list() {
+        respond(transferService.list()) as List<Transfer>
     }
 
     def show(Long id) {
@@ -45,7 +44,7 @@ class TransferController {
             return
         }
 
-        respond transfer, [status: CREATED, view:"show"]
+        respond transfer, [status: CREATED, view: "show"]
     }
 
     @Transactional
@@ -67,7 +66,7 @@ class TransferController {
             return
         }
 
-        respond transfer, [status: OK, view:"show"]
+        respond transfer, [status: OK, view: "show"]
     }
 
     @Transactional

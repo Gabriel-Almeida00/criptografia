@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class TransferService {
 
-    void list() {
+    List<Transfer> list() {
         Transfer.list()
     }
 
