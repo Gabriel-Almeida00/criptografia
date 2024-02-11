@@ -64,6 +64,7 @@ dependencies {
     testCompile "io.micronaut:micronaut-http-client"
     testCompile "org.grails:grails-web-testing-support"
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    implementation 'org.springframework.security:spring-security-core:6.1.2'
 }
 
 bootRun {
