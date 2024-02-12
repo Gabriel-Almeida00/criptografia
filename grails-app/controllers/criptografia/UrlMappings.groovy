@@ -6,6 +6,7 @@ class UrlMappings {
 
         get "/all" (controller: 'transfer', action: 'list')
         post "/create" (controller: 'transfer', action: 'create')
+        delete "/$id" (controller: 'transfer', action: 'delete')
 
 
         "/"(controller: 'application', action: 'index')

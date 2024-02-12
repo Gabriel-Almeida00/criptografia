@@ -26,4 +26,8 @@ class TransferService {
         newTransfer.save()
     }
 
+    void delete(Long id){
+        Transfer tranfer = Transfer.findById(id)
+        tranfer.delete()
+    }
 }
