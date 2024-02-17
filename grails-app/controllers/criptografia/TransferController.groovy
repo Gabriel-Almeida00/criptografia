@@ -1,11 +1,13 @@
 package criptografia
 
+import DTO.RequestTransfer
+
 class TransferController {
 
     TransferService transferService
 
     static responseFormats = ['json', 'xml']
-    static allowedMethods = [list: "GET", create: "POST",delete: "DELETE"]
+    static allowedMethods = [list: "GET", create: "POST", update: "PUT", delete: "DELETE"]
 
     List<Transfer> list() {
         respond(transferService.list()) as List<Transfer>
@@ -16,7 +18,12 @@ class TransferController {
         render(contentType: responseFormats, text: 'mensagemDeErro')
     }
 
-    def delete(Long id){
+    def update(Long id, RequestTransfer requestTransfer) {
+        transferService.update(id, requestTransfer)
+        render(contentType: responseFormats, text: 'deu bom')
+    }
+
+    def delete(Long id) {
         transferService.delete(id)
         render(contentType: responseFormats, text: 'mensagemDeErro')
     }
