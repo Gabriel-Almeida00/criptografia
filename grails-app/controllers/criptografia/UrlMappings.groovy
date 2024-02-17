@@ -7,7 +7,7 @@ class UrlMappings {
         get "/all" (controller: 'transfer', action: 'list')
         post "/create" (controller: 'transfer', action: 'create')
         delete "/$id" (controller: 'transfer', action: 'delete')
-        put "/$id" (controller: 'transfer', action: 'put')
+        put "/$id" (controller: 'transfer', action: 'update')
 
 
         "/"(controller: 'application', action: 'index')
