@@ -7,7 +7,16 @@ class TransferController {
     TransferService transferService
 
     static responseFormats = ['json', 'xml']
-    static allowedMethods = [list: "GET", create: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [
+            findById: "GET",
+            list    : "GET",
+            create  : "POST",
+            update  : "PUT",
+            delete  : "DELETE"]
+
+    Transfer findById(Long id) {
+        respond(transferService.findById(id)) as Transfer
+    }
 
     List<Transfer> list() {
         respond(transferService.list()) as List<Transfer>

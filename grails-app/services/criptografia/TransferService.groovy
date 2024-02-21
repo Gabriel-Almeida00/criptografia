@@ -8,6 +8,11 @@ class TransferService {
 
     CriptografiaService criptografiaService
 
+    Transfer findById(Long id){
+        Transfer transfer = Transfer.findById(id)
+        return transfer
+    }
+
     List<Transfer> list() {
         List<Transfer> transferList = Transfer.getAll()
         transferList.forEach { transfer ->
