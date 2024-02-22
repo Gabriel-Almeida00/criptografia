@@ -24,16 +24,16 @@ class TransferController {
 
     def create(Transfer transfer) {
         transferService.create(transfer)
-        render(contentType: responseFormats, text: 'mensagemDeErro')
+        render(contentType: responseFormats, status: 201)
     }
 
     def update(Long id, RequestTransfer requestTransfer) {
         transferService.update(id, requestTransfer)
-        render(contentType: responseFormats, text: 'deu bom')
+        render(contentType: responseFormats,  status: 204)
     }
 
     def delete(Long id) {
         transferService.delete(id)
-        render(contentType: responseFormats, text: 'mensagemDeErro')
+        render(contentType: responseFormats, status: 204)
     }
 }
