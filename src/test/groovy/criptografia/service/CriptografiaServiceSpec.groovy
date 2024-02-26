@@ -1,5 +1,6 @@
-package criptografia
+package criptografia.service
 
+import criptografia.CriptografiaService
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 

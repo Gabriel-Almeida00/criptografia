@@ -5,14 +5,12 @@ import spock.lang.Specification
 
 class TransferSpec extends Specification implements DomainUnitTest<Transfer> {
 
-    def setup() {
-    }
+    void 'test name cannot be null'() {
+        when:
+        domain.userDocument = null
 
-    def cleanup() {
-    }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        then:
+        !domain.validate(['userDocument'])
+        domain.errors['userDocument'].code == 'nullable'
     }
 }
