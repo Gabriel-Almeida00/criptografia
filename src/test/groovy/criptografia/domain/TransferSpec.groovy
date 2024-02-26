@@ -1,5 +1,6 @@
-package criptografia
+package criptografia.domain
 
+import criptografia.Transfer
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 

@@ -1,19 +1,23 @@
 package criptografia.service
 
+import criptografia.Transfer
 import criptografia.TransferService
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
 class TransferServiceSpec extends Specification implements ServiceUnitTest<TransferService>{
 
-    def setup() {
-    }
+    TransferService service = Mock(TransferService)
 
-    def cleanup() {
-    }
+    void "test findById"() {
+        given:
+        Transfer transfer = new Transfer()
+        service.findById(1) >> transfer
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        when:
+        Transfer transferEsperada = service.findById(1)
+
+        then:
+        transfer == transferEsperada
     }
 }
