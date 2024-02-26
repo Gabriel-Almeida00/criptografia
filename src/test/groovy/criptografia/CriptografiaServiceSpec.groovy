@@ -5,14 +5,18 @@ import spock.lang.Specification
 
 class CriptografiaServiceSpec extends Specification implements ServiceUnitTest<CriptografiaService>{
 
-    def setup() {
-    }
+    CriptografiaService service = Mock(CriptografiaService)
 
-    def cleanup() {
-    }
+    void "teste para encode"(){
+        given:
+        String rawPassword = "123456"
+        String criptografada = "7zXrzCNj8biN69IDnCLNfw=="
+        service.encode(rawPassword) >> criptografada
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        when:
+        String encodedPassword = service.encode(rawPassword)
+
+        then:
+        encodedPassword == criptografada
     }
 }

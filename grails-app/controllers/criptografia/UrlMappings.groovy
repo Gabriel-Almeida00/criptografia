@@ -4,9 +4,9 @@ class UrlMappings {
 
     static mappings = {
 
-        get "/" (controller: 'transfer', action: 'list')
+        get "/all" (controller: 'transfer', action: 'list')
         get "/$id" (controller: 'transfer', action: 'findById')
-        post "/" (controller: 'transfer', action: 'create')
+        post "/create" (controller: 'transfer', action: 'create')
         delete "/$id" (controller: 'transfer', action: 'delete')
         put "/$id" (controller: 'transfer', action: 'update')
 
