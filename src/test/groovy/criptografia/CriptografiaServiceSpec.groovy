@@ -19,4 +19,17 @@ class CriptografiaServiceSpec extends Specification implements ServiceUnitTest<C
         then:
         encodedPassword == criptografada
     }
+
+    void "teste para decrypt"(){
+        given:
+        String rawPassword = "123456"
+        String criptografada = "7zXrzCNj8biN69IDnCLNfw=="
+        service.decrypt(criptografada) >> rawPassword
+
+        when:
+        String encodedPassword = service.decrypt(criptografada)
+
+        then:
+        encodedPassword == rawPassword
+    }
 }
