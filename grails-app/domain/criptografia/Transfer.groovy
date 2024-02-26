@@ -7,11 +7,11 @@ class Transfer {
 
     String userDocument
     String creditCardToken
-    double transferValue
+    Double transferValue
 
     static constraints = {
-        userDocument(nullable: true)
-        creditCardToken(nullable: true)
-        transferValue(nullable: true)
+        userDocument(nullable: false)
+        creditCardToken(nullable: false)
+        transferValue(nullable: false)
     }
 }
