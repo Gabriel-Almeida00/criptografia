@@ -1,5 +1,6 @@
 package criptografia.service
 
+import criptografia.CriptografiaService
 import criptografia.Transfer
 import criptografia.TransferService
 import grails.testing.services.ServiceUnitTest
@@ -20,4 +21,17 @@ class TransferServiceSpec extends Specification implements ServiceUnitTest<Trans
         then:
         transfer == transferEsperada
     }
+    void "test list all"() {
+        given:
+        List<Transfer> transfers = [new Transfer()]
+        service.list() >> transfers
+
+        when:
+        List<Transfer> transfersList = service.list()
+
+        then:
+        transfers == transfersList
+    }
+
+
 }
