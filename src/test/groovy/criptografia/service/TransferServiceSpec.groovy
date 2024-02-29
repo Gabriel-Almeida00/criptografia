@@ -1,6 +1,6 @@
 package criptografia.service
 
-
+import DTO.RequestTransfer
 import criptografia.Transfer
 import criptografia.TransferService
 import grails.testing.gorm.DataTest
@@ -44,6 +44,28 @@ class TransferServiceSpec extends Specification implements ServiceUnitTest<Trans
 
         then:
         1 * service.create(transfer)
+    }
 
+    void "teste update transfer"(){
+        given:
+        Long id = 1
+        RequestTransfer requestTransfer = new RequestTransfer()
+
+        when:
+        service.update(id, requestTransfer)
+
+        then:
+        1 * service.update(id, requestTransfer)
+    }
+
+    void "teste delete trnafer"(){
+        given:
+        Long id = 1
+
+        when:
+        service.delete(1)
+
+        then:
+        1 * service.delete(1)
     }
 }
