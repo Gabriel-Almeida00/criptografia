@@ -15,26 +15,19 @@ import grails.testing.gorm.DomainUnitTest
 
 class TransferControllerSpec extends Specification implements ControllerUnitTest<TransferController>, DomainUnitTest<Transfer> {
 
-    def populateValidParams(params) {
-        assert params != null
+   TransferController controller = Mock(TransferController)
 
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
-    }
-
-    void "Test the index action returns the correct response"() {
+    void "Test findById"() {
         given:
-        controller.transferService = Mock(TransferService) {
-            1 * list(_) >> []
-            1 * count() >> 0
-        }
+        Long id = 1
+        Transfer transferEsperado = new Transfer()
+        controller.findById(id) >> transferEsperado
 
-        when:"The index action is executed"
-            controller.index()
+        when:
+        Transfer transfer = controller.findById(id)
 
-        then:"The response is correct"
-            response.text == '[]'
+        then:
+        transfer == transferEsperado
     }
 
 

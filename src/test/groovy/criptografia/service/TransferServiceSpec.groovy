@@ -63,9 +63,9 @@ class TransferServiceSpec extends Specification implements ServiceUnitTest<Trans
         Long id = 1
 
         when:
-        service.delete(1)
+        service.delete(id)
 
         then:
-        1 * service.delete(1)
+        1 * service.delete(id)
     }
 }
