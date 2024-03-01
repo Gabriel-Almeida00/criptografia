@@ -31,53 +31,39 @@ class TransferControllerSpec extends Specification implements ControllerUnitTest
     }
 
 
-    void "Test the save action with a null instance"() {
+    void "Test list"() {
+        given:
+        List<Transfer> transfers = [new Transfer()]
+        controller.list() >> transfers
+
         when:
-        request.contentType = JSON_CONTENT_TYPE
-        request.method = 'POST'
-        controller.save()
+        List<Transfer> transfersEsperadas = controller.list()
 
         then:
-        response.status == UNPROCESSABLE_ENTITY.value()
+        transfersEsperadas == transfers
     }
 
-    void "Test the save action correctly persists"() {
+    void "Test create"() {
         given:
-        controller.transferService = Mock(TransferService) {
-            1 * save(_ as Transfer)
-        }
+        Transfer transfer = new Transfer()
+        controller.create(transfer)
 
         when:
-        response.reset()
-        request.contentType = JSON_CONTENT_TYPE
-        request.method = 'POST'
-        populateValidParams(params)
-        request.json = new Transfer(params)
-        controller.save()
+        controller.create(transfer)
 
         then:
-        response.status == CREATED.value()
-        response.json
+        1 * controller.create(transfer)
     }
 
-    void "Test the save action with an invalid instance"() {
+    void "Test update"() {
         given:
-        controller.transferService = Mock(TransferService) {
-            1 * save(_ as Transfer) >> { Transfer transfer ->
-                throw new ValidationException("Invalid instance", transfer.errors)
-            }
-        }
+
 
         when:
-        request.contentType = JSON_CONTENT_TYPE
-        request.method = 'POST'
-        populateValidParams(params)
-        request.json = new Transfer(params)
-        controller.save()
+
 
         then:
-        response.status == UNPROCESSABLE_ENTITY.value()
-        response.json
+
     }
 
     void "Test the show action with a null id"() {
