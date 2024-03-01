@@ -58,7 +58,7 @@ class TransferServiceSpec extends Specification implements ServiceUnitTest<Trans
         1 * service.update(id, requestTransfer)
     }
 
-    void "teste delete trnafer"(){
+    void "teste delete transfer"(){
         given:
         Long id = 1
 
