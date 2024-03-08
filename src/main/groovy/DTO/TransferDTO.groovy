@@ -25,5 +25,4 @@ class TransferDTO {
         this.creditCardToken = data.creditCardToken
         this.transferValue = data.transferValue
     }
-
 }
