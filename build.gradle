@@ -86,6 +86,69 @@ bootRun {
     systemProperty springProfilesActive, System.getProperty(springProfilesActive)
 }
 
+task pullPostgresImage(type: DockerPullImage) {
+    group = 'docker'
+    ext {
+        imageName = 'postgres'
+        imageTag = '9.6.6'
+    }
+    description = 'Pull PostgreSQL image'
+    repository = imageName
+    tag = imageTag
+}
+task createPostgresContainer(type: DockerCreateContainer, dependsOn: pullPostgresImage) {
+    group = 'docker'
+    ext {
+        pgContainerName = "demo-postgres"
+        dbName = "demo_db"
+        dbPort = 5432
+        dbPassword = 'dev_password'
+    }
+    description = 'Creates PostgreSQL container'
+    containerName = pgContainerName
+    imageId = "${pullPostgresImage.imageName}:${pullPostgresImage.tag}"
+    portBindings = ["${dbPort}:5432"]
+    env = [
+            "POSTGRES_PASSWORD=${dbPassword}",
+            "POSTGRES_DB=${dbName}",
+    ] as String[]
+
+    onError { e ->
+        if (e.class.simpleName in ['BadRequestException', 'ConflictException']) {
+            logger.warn 'Container already exists'
+        } else {
+            throw e
+        }
+    }
+}
+task startPostgresContainer(type: DockerStartContainer, dependsOn: createPostgresContainer) {
+    group = 'docker'
+    description = 'Starts Postgres container'
+    containerId = createPostgresContainer.pgContainerName
+    onError { e ->
+        if (e.class.simpleName == 'NotModifiedException') {
+            logger.warn 'Container already started'
+        } else {
+            throw e
+        }
+    }
+    onComplete {
+        logger.info "Postgres is listening on port ${createPostgresContainer.dbPort}"
+    }
+}
+task stopPostgresContainer(type: DockerStopContainer) {
+    group = 'docker'
+    description = 'Stops Postgres container'
+    containerId = createPostgresContainer.pgContainerName
+    onError { e ->
+        if (e.class.simpleName == 'NotModifiedException') {
+            logger.warn 'Container already stopped'
+        } else {
+            throw e
+        }
+    }
+}
+
 ext {
     dockerTag = "grails-sample/${project.name}:${project.version}".toLowerCase()
     dockerBuildDir = mkdir("${buildDir}/docker")
